@@ -48,7 +48,7 @@ for service in "${services[@]}"; do
         echo -e "${red}${bold} $service no está en ejecución. Iniciando...${reset}"
         sudo systemctl start "$service" >/dev/null 2>&1
     else
-        echo -e "${green}${bold}$service ya está en ejecución.{reset}"
+        echo -e "${green}${bold}$service ya está en ejecución.${reset}"
     fi
 
     # Habilitar el servicio para iniciar en el arranque
@@ -64,7 +64,7 @@ done
 # Instalacion del repo
 
 if [ -d "$REPO/.git" ]; then
-     echo -e "${green}${bold} El repositorio ya existe, realizando git pull..."
+     echo -e "${green}${bold} El repositorio ya existe, realizando git pull...${reset}"
     cd "$REPO_DIR" || exit
     git pull
 else
