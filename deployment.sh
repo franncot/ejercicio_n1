@@ -96,7 +96,7 @@ sudo systemctl reload apache2 >/dev/null 2>&1
 DISCORD="https://discord.com/api/webhooks/1169002249939329156/7MOorDwzym-yBUs3gp0k5q7HyA42M5eYjfjpZgEwmAx1vVVcLgnlSh4TmtqZqCtbupov"
 
 # Obtiene el nombre del repositorio
-REPO_NAME=$(ejercicio_n1)
+REPO_NAME="ejercicio_n1"
 # Obtiene la URL remota del repositorio
 REPO_URL="https://github.com/franncot/ejercicio_n1.git"
 WEB_URL="http://localhost/index.php"
