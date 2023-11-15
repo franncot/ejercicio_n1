@@ -30,11 +30,11 @@ components=("apache2" "mariadb-server" "php" "git" "libapache2-mod-php" "php-mys
 # Loop through the components array and check/install each one
 for component in "${components[@]}"; do
     if ! command -v "$component" &>/dev/null; then
-        echo -e "${red}${bold} $component instalando...${reset}"
+        echo -e "${red}${bold} Instalando $component .${reset}"
         sudo apt update >/dev/null 2>&1
         sudo apt install "$component" -y >/dev/null 2>&1
     else
-        echo -e "${green}${bold} $component ya instalado.${reset}"
+        echo -e "${green}${bold} $component ya esta instalado.${reset}"
 		
     fi
 done
