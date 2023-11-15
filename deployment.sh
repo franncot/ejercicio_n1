@@ -32,7 +32,6 @@ for component in "${components[@]}"; do
     if dpkg -s "$component" >/dev/null 2>&1; then
         echo -e "${green}${bold} $component ya esta instalado.${reset}"
     else
-        
         echo -e "${red}${bold} Instalando $component .${reset}"
         sudo apt update >/dev/null 2>&1
         sudo apt install "$component" -y >/dev/null 2>&1
@@ -90,3 +89,39 @@ sed -i "s/DirectoryIndex index.html index.cgi index.pl index.php index.xhtml ind
 sed -i 's/""/"codepass"/g' /var/www/html/config.php
 
 sudo systemctl reload apache2 >/dev/null 2>&1
+
+
+#Notificacion
+DISCORD="https://discord.com/api/webhooks/1169002249939329156/7MOorDwzym-yBUs3gp0k5q7HyA42M5eYjfjpZgEwmAx1vVVcLgnlSh4TmtqZqCtbupov"
+
+# Obtiene el nombre del repositorio
+REPO_NAME="ejercicio_n1"
+# Obtiene la URL remota del repositorio
+REPO_URL="https://github.com/franncot/ejercicio_n1.git"
+WEB_URL="http://localhost/index.php"
+# Realiza una solicitud HTTP GET a la URL
+HTTP_STATUS=$(curl -Is "$WEB_URL" | head -n 1)
+
+# Verifica si la respuesta es 200 OK (puedes ajustar esto según tus necesidades)
+if [[ "$HTTP_STATUS" == *"200 OK"* ]]; then
+  # Obtén información del repositorio
+    DEPLOYMENT_INFO2="Despliegue del repositorio $REPO_NAME: "
+    DEPLOYMENT_INFO="La página web $WEB_URL está en línea."
+    COMMIT="Commit: $(git rev-parse --short HEAD)"
+    AUTHOR="Autor: $(git log -1 --pretty=format:'%an')"
+    DESCRIPTION="Descripción: $(git log -1 --pretty=format:'%s')"
+else
+  DEPLOYMENT_INFO="La página web $WEB_URL no está en línea."
+fi
+
+# Obtén información del repositorio
+
+
+# Construye el mensaje
+MESSAGE="$DEPLOYMENT_INFO2\n$DEPLOYMENT_INFO\n$COMMIT\n$AUTHOR\n$REPO_URL\n$DESCRIPTION"
+
+# Envía el mensaje a Discord utilizando la API de Discord
+curl -X POST -H "Content-Type: application/json" \
+     -d '{
+       "content": "'"${MESSAGE}"'"
+     }' "$DISCORD" 
