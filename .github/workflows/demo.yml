@@ -1,0 +1,15 @@
+name: Demo 
+on: [push]
+
+jobs:
+  ubuntu-run:
+    runs-on: ubuntu-19.04
+
+    env:
+      greetname: World
+
+    steps:
+      - name: Greet User
+        run:
+          echo Heloo $greetname on $UNNERos
+    
