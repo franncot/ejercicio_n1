@@ -29,7 +29,7 @@ components=("apache2" "mariadb-server" "php" "git" "libapache2-mod-php" "php-mys
 
 # Loop through the components array and check/install each one
 for component in "${components[@]}"; do
-    if dpkg -s "$component" >/dev/null 2>&1;; then
+    if dpkg -s "$component" >/dev/null 2>&1; then
         echo -e "${red}${bold} Instalando $component .${reset}"
         sudo apt update >/dev/null 2>&1
         sudo apt install "$component" -y >/dev/null 2>&1
