@@ -86,7 +86,6 @@ mysql < $REPO/app-295devops-travel/database/devopstravel.sql >/dev/null 2>&1
 
 #Modify PHP 
 sed -i "s/DirectoryIndex index.html index.cgi index.pl index.php index.xhtml index.htm/DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm/g" /etc/apache2/mods-enabled/dir.conf
-
 sed -i 's/""/"codepass"/g' /var/www/html/config.php
 
 sudo systemctl reload apache2 >/dev/null 2>&1
