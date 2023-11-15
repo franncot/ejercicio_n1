@@ -75,11 +75,28 @@ else
 fi
 
 
-mysql -e "
-CREATE DATABASE devopstravel;
-CREATE USER 'codeuser'@'localhost' IDENTIFIED BY 'codepass';
-GRANT ALL PRIVILEGES ON *.* TO 'codeuser'@'localhost';
-FLUSH PRIVILEGES;"
+# Comando SQL para verificar la existencia de la base de datos
+database_check=$(mysql -e "SHOW DATABASES LIKE 'devopstravel'")
+
+# Verificar si la base de datos existe
+if [ -z "$database_check" ]; then
+    # La base de datos no existe, procede con la creación
+    mysql -e "
+    CREATE DATABASE devopstravel;
+    CREATE USER 'codeuser'@'localhost' IDENTIFIED BY 'codepass';
+    GRANT ALL PRIVILEGES ON *.* TO 'codeuser'@'localhost';
+    FLUSH PRIVILEGES;"
+    mysql < $REPO/app-295devops-travel/database/devopstravel.sql >/dev/null 2>&1
+else
+    echo "La base de datos 'devopstravel' ya existe. No se intentará crear nuevamente."
+fi
+
+
+#mysql -e "
+#CREATE DATABASE devopstravel;
+#CREATE USER 'codeuser'@'localhost' IDENTIFIED BY 'codepass';
+#GRANT ALL PRIVILEGES ON *.* TO 'codeuser'@'localhost';
+#FLUSH PRIVILEGES;"
 
 sleep 2
 mysql < $REPO/app-295devops-travel/database/devopstravel.sql >/dev/null 2>&1
