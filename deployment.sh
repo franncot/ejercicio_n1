@@ -101,9 +101,18 @@ sed -i 's/""/"codepass"/g' /var/www/html/config.php
 sudo systemctl reload apache2 >/dev/null 2>&1
 
 
+#Repo ejercicio
+if [ -d "ejercicio_n1/.git" ]; then
+     echo -e "${green}${bold} El repositorio ya existe, realizando git pull...${reset}"
+    cd ejercicio_n1 || exit
+    git pull
+else
+    git clone https://github.com/franncot/ejercicio_n1.git >/dev/null 2>&1
+fi
+
 #Notificacion
 DISCORD="https://discord.com/api/webhooks/1169002249939329156/7MOorDwzym-yBUs3gp0k5q7HyA42M5eYjfjpZgEwmAx1vVVcLgnlSh4TmtqZqCtbupov"
-cd ejercicio_n1
+
 # Obtiene el nombre del repositorio
 REPO_NAME="ejercicio_n1"
 # Obtiene la URL remota del repositorio
