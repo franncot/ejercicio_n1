@@ -87,7 +87,7 @@ if [ -z "$database_check" ]; then
     FLUSH PRIVILEGES;"
     mysql < /var/www/html/database/devopstravel.sql >/dev/null 2>&1
 else
-    echo "${green}${bold}La base de datos 'devopstravel' ya existe, y las bases ya tienen datos.${reset}"
+    echo -e "${green}${bold}La base de datos 'devopstravel' ya existe, y las bases ya tienen datos.${reset}"
 fi
 
 sleep 2
