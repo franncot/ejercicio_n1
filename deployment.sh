@@ -108,12 +108,12 @@ cd ejercicio_n1
 REPO_NAME="ejercicio_n1"
 # Obtiene la URL remota del repositorio
 REPO_URL="https://github.com/franncot/ejercicio_n1.git"
-WEB_URL="http://localhost/index.php"
+WEB_URL="http://54.152.223.94/index.php"
 # Realiza una solicitud HTTP GET a la URL
 HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$WEB_URL")
 
 # Verifica si la respuesta es 200 OK (puedes ajustar esto según tus necesidades)
-if [[ "$HTTP_STATUS" == *"200 OK"* ]]; then
+if [[ "$HTTP_STATUS" == "200" ]]; then
   # Obtén información del repositorio
     DEPLOYMENT_INFO2="Despliegue del repositorio $REPO_NAME: "
     DEPLOYMENT_INFO="La página web $WEB_URL está en línea."
