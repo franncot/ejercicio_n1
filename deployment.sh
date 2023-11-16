@@ -108,7 +108,7 @@ cd ejercicio_n1
 REPO_NAME="ejercicio_n1"
 # Obtiene la URL remota del repositorio
 REPO_URL="https://github.com/franncot/ejercicio_n1.git"
-WEB_URL="http://54.152.223.94/index.php"
+WEB_URL="http://ec2-54-152-223-94.compute-1.amazonaws.com/index.php"
 # Realiza una solicitud HTTP GET a la URL
 HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$WEB_URL")
 
