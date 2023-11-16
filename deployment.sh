@@ -86,17 +86,10 @@ if [ -z "$database_check" ]; then
     CREATE USER 'codeuser'@'localhost' IDENTIFIED BY 'codepass';
     GRANT ALL PRIVILEGES ON *.* TO 'codeuser'@'localhost';
     FLUSH PRIVILEGES;"
-    mysql < $REPO/app-295devops-travel/database/devopstravel.sql >/dev/null 2>&1
+    mysql < /var/www/html/database/devopstravel.sql >/dev/null 2>&1
 else
-    echo "La base de datos 'devopstravel' ya existe. No se intentará crear nuevamente."
+    echo "La base de datos 'devopstravel' ya existe, y las bases ya tienen datos."
 fi
-
-
-#mysql -e "
-#CREATE DATABASE devopstravel;
-#CREATE USER 'codeuser'@'localhost' IDENTIFIED BY 'codepass';
-#GRANT ALL PRIVILEGES ON *.* TO 'codeuser'@'localhost';
-#FLUSH PRIVILEGES;"
 
 sleep 2
 mysql < $REPO/app-295devops-travel/database/devopstravel.sql >/dev/null 2>&1
@@ -118,7 +111,7 @@ REPO_NAME="ejercicio_n1"
 REPO_URL="https://github.com/franncot/ejercicio_n1.git"
 WEB_URL="http://localhost/index.php"
 # Realiza una solicitud HTTP GET a la URL
-HTTP_STATUS=$(curl -Is "$WEB_URL" | head -n 1)
+HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$WEB_URL")
 
 # Verifica si la respuesta es 200 OK (puedes ajustar esto según tus necesidades)
 if [[ "$HTTP_STATUS" == *"200 OK"* ]]; then
