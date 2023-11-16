@@ -45,7 +45,7 @@ services=("apache2" "mariadb")
 for service in "${services[@]}"; do
     # Verificar si el servicio está corriendo
     if ! systemctl is-active --quiet "$service"; then
-        echo -e "${red}${bold} $service no está en ejecución. Iniciando...${reset}"
+        echo -e "${red}${bold}$service no está en ejecución. Iniciando...${reset}"
         sudo systemctl start "$service" >/dev/null 2>&1
     else
         echo -e "${green}${bold}$service ya está en ejecución.${reset}"
@@ -66,7 +66,6 @@ done
 if [ -d "$REPO/.git" ]; then
      echo -e "${green}${bold} El repositorio ya existe, realizando git pull...${reset}"
     cd "$REPO_DIR" || exit
-    git pull
 else
     echo -e "${red}${bold}Clonando el repositorio, por favor espera!${reset}"
     git clone -b clase2-linux-bash --single-branch https://github.com/roxsross/$REPO.git >/dev/null 2>&1
@@ -88,7 +87,7 @@ if [ -z "$database_check" ]; then
     FLUSH PRIVILEGES;"
     mysql < /var/www/html/database/devopstravel.sql >/dev/null 2>&1
 else
-    echo "La base de datos 'devopstravel' ya existe, y las bases ya tienen datos."
+    echo "${green}${bold}La base de datos 'devopstravel' ya existe, y las bases ya tienen datos.${reset}"
 fi
 
 sleep 2
@@ -103,11 +102,11 @@ sudo systemctl reload apache2 >/dev/null 2>&1
 
 #Repo ejercicio
 if [ -d "ejercicio_n1/.git" ]; then
-     echo -e "${green}${bold} El repositorio ya existe, realizando git pull...${reset}"
-    cd ejercicio_n1 || exit
+     echo -e "${green}${bold} El repositorio ya existe...${reset}"
+    cd ejercicio_n1 || exit 
 else
     git clone https://github.com/franncot/ejercicio_n1.git >/dev/null 2>&1
-    cd ejercicio_n1 || exit
+    cd ejercicio_n1 || exit 
 fi
 
 #Notificacion
