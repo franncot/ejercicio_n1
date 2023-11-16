@@ -105,7 +105,6 @@ sudo systemctl reload apache2 >/dev/null 2>&1
 if [ -d "ejercicio_n1/.git" ]; then
      echo -e "${green}${bold} El repositorio ya existe, realizando git pull...${reset}"
     cd ejercicio_n1 || exit
-    git pull
 else
     git clone https://github.com/franncot/ejercicio_n1.git >/dev/null 2>&1
     cd ejercicio_n1 || exit
