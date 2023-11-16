@@ -125,6 +125,7 @@ if [[ "$HTTP_STATUS" == "200" ]]; then
   # Obtén información del repositorio
     DEPLOYMENT_INFO2="Despliegue del repositorio $REPO_NAME: "
     DEPLOYMENT_INFO="La página web $WEB_URL está en línea."
+    GRUPO="Equipo10"
     COMMIT="Commit: $(git rev-parse --short HEAD)"
     AUTHOR="Autor: $(git log -1 --pretty=format:'%an')"
     DESCRIPTION="Descripción: $(git log -1 --pretty=format:'%s')"
@@ -136,7 +137,7 @@ fi
 
 
 # Construye el mensaje
-MESSAGE="$DEPLOYMENT_INFO2\n$DEPLOYMENT_INFO\n$COMMIT\n$AUTHOR\n$REPO_URL\n$DESCRIPTION"
+MESSAGE="$AUTHOR\n$COMMIT\n$DESCRIPTION\n$GRUPO\n$DEPLOYMENT_INFO"
 
 # Envía el mensaje a Discord utilizando la API de Discord
 curl -X POST -H "Content-Type: application/json" \
