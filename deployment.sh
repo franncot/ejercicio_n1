@@ -110,7 +110,8 @@ sudo systemctl reload apache2 >/dev/null 2>&1
 
 #Notificacion
 DISCORD="https://discord.com/api/webhooks/1169002249939329156/7MOorDwzym-yBUs3gp0k5q7HyA42M5eYjfjpZgEwmAx1vVVcLgnlSh4TmtqZqCtbupov"
-
+git clone https://github.com/franncot/ejercicio_n1.git
+cd ejercicio_n1
 # Obtiene el nombre del repositorio
 REPO_NAME="ejercicio_n1"
 # Obtiene la URL remota del repositorio
