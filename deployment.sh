@@ -108,6 +108,7 @@ if [ -d "ejercicio_n1/.git" ]; then
     git pull
 else
     git clone https://github.com/franncot/ejercicio_n1.git >/dev/null 2>&1
+    cd ejercicio_n1 || exit
 fi
 
 #Notificacion
