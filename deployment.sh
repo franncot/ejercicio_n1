@@ -23,9 +23,9 @@ components=("apache2" "mariadb-server" "php" "git" "libapache2-mod-php" "php-mys
 # Loop through the components array and check/install each one
 for component in "${components[@]}"; do
     if dpkg -s "$component" >/dev/null 2>&1; then
-        echo -e "${green}${bold} $component ya esta instalado.${reset}"
+        echo -e "${green}${bold}$component ya esta instalado.${reset}"
     else
-        echo -e "${red}${bold} Instalando $component .${reset}"
+        echo -e "${red}${bold}Instalando $component .${reset}"
         sudo apt update >/dev/null 2>&1
         sudo apt install "$component" -y >/dev/null 2>&1
 		
@@ -57,13 +57,13 @@ done
 # Instalacion del repo
 
 if [ -d "$REPO/.git" ]; then
-     echo -e "${green}${bold} El repositorio ya existe, realizando git pull...${reset}"
+     echo -e "${green}${bold}El repositorio ya existe, realizando git pull...${reset}"
     cd "$REPO_DIR" || exit
 else
     echo -e "${red}${bold}Clonando el repositorio, por favor espera!${reset}"
     git clone -b clase2-linux-bash --single-branch https://github.com/roxsross/$REPO.git >/dev/null 2>&1
 	cp -r $REPO/app-295devops-travel/* /var/www/html
-	echo -e "${green}${bold} Repo clonado y direccionado al folder html${reset}"
+	echo -e "${green}${bold}Repo clonado y direccionado al folder html${reset}"
 fi
 
 
@@ -95,7 +95,7 @@ sudo systemctl reload apache2 >/dev/null 2>&1
 
 #Repo ejercicio
 if [ -d "ejercicio_n1/.git" ]; then
-     echo -e "${green}${bold} El repositorio ya existe...${reset}"
+     echo -e "${green}${bold}El repositorio ya existe...${reset}"
     cd ejercicio_n1 || exit 
 else
     git clone https://github.com/franncot/ejercicio_n1.git >/dev/null 2>&1
