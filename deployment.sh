@@ -8,7 +8,6 @@ reset="\e[0m"
 REPO="bootcamp-devops-2023"
 
 
-
 #Priviledges
 if [ "$EUID" -ne 0 ]; then
     echo -e "${red}${bold}Este script requiere priviledgios de administrador para ser ejecutado. Por favor usa Sudo o Root.${reset}"
@@ -16,8 +15,7 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 
-
-# STAGE 1
+# Installation of components
 components=("apache2" "mariadb-server" "php" "git" "libapache2-mod-php" "php-mysql" "php-mbstring" "php-zip" "php-gd" "php-json" "php-curl" )
 
 # Loop through the components array and check/install each one
@@ -58,7 +56,6 @@ done
 
 if [ -d "$REPO/.git" ]; then
      echo -e "${green}${bold}El repositorio ya existe, realizando git pull...${reset}"
-    cd "$REPO_DIR" || exit
 else
     echo -e "${red}${bold}Clonando el repositorio, por favor espera!${reset}"
     git clone -b clase2-linux-bash --single-branch https://github.com/roxsross/$REPO.git >/dev/null 2>&1
@@ -80,16 +77,14 @@ if [ -z "$database_check" ]; then
     FLUSH PRIVILEGES;"
     mysql < /var/www/html/database/devopstravel.sql >/dev/null 2>&1
 else
-    echo -e "${green}${bold}La base de datos 'devopstravel' ya existe, y las bases ya tienen datos.${reset}"
+    echo -e "${green}${bold}La base de datos 'devopstravel' ya existe, no se necesita modificar nada mas.${reset}"
 fi
 
-sleep 2
-mysql < $REPO/app-295devops-travel/database/devopstravel.sql >/dev/null 2>&1
-
-#Modify PHP 
+#Modify PHP configurations
 sed -i "s/DirectoryIndex index.html index.cgi index.pl index.php index.xhtml index.htm/DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm/g" /etc/apache2/mods-enabled/dir.conf
 sed -i 's/""/"codepass"/g' /var/www/html/config.php
 
+#Reload to get changes
 sudo systemctl reload apache2 >/dev/null 2>&1
 
 
