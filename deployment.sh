@@ -56,7 +56,7 @@ for service in "${services[@]}"; do
         echo -e "${red}${bold}Habilitando $service para iniciar en el arranque.${reset}"
         sudo systemctl enable "$service" >/dev/null 2>&1
     else
-         echo -e "${green}${bold} $service ya está configurado para iniciar en el arranque.${reset}"
+         echo -e "${green}${bold}$service ya está configurado para iniciar en el arranque.${reset}"
     fi
 done
 
