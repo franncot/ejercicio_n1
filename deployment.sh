@@ -123,7 +123,7 @@ HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$WEB_URL")
 # Verifica si la respuesta es 200 OK (puedes ajustar esto según tus necesidades)
 if [[ "$HTTP_STATUS" == "200" ]]; then
   # Obtén información del repositorio
-    DEPLOYMENT_INFO2="Despliegue del repositorio $REPO_NAME: "
+    #DEPLOYMENT_INFO2="Despliegue del repositorio $REPO_NAME: "
     DEPLOYMENT_INFO="La página web $WEB_URL está en línea."
     GRUPO="Equipo10"
     COMMIT="Commit: $(git rev-parse --short HEAD)"
