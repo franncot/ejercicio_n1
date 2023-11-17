@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#Variables
+#Variables de colores
 red="\e[0;91m"
 green="\e[0;92m"
 bold="\e[1m"
@@ -57,6 +57,10 @@ done
 
 if [ -d "$REPO/.git" ]; then
      echo -e "${green}${bold}El repositorio ya existe, realizando git pull...${reset}"
+     cd $REPO
+     git pull >/dev/null 2>&1
+     cp -r $REPO/app-295devops-travel/* /var/www/html
+	 echo -e "${green}${bold}Pull completado, datos copiados a la carpeta html${reset}"
 else
     echo -e "${red}${bold}Clonando el repositorio, por favor espera!${reset}"
     git clone -b clase2-linux-bash --single-branch https://github.com/roxsross/$REPO.git >/dev/null 2>&1
@@ -102,10 +106,10 @@ fi
 DISCORD="https://discord.com/api/webhooks/1169002249939329156/7MOorDwzym-yBUs3gp0k5q7HyA42M5eYjfjpZgEwmAx1vVVcLgnlSh4TmtqZqCtbupov"
 WEB_URL="http://localhost/index.php"
 
-# Realiza una solicitud HTTP GET a la URL
+# Realiza prueba de hhtp code
 HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$WEB_URL")
 
-# Verifica si la respuesta es 200 OK (puedes ajustar esto según tus necesidades)
+# Verifica si la pagina responde correctamente
 if [[ "$HTTP_STATUS" == "200" ]]; then
     DEPLOYMENT_INFO="295DevOpsTravel - está en línea."
     GRUPO="Equipo10"
