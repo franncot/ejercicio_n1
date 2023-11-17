@@ -59,6 +59,7 @@ if [ -d "$REPO/.git" ]; then
      echo -e "${green}${bold}El repositorio ya existe, realizando git pull...${reset}"
      cd $REPO
      git pull >/dev/null 2>&1
+     cd ..
      cp -r $REPO/app-295devops-travel/* /var/www/html
 	 echo -e "${green}${bold}Pull completado, datos copiados a la carpeta html${reset}"
 else
