@@ -103,7 +103,7 @@ DISCORD="https://discord.com/api/webhooks/1169002249939329156/7MOorDwzym-yBUs3gp
 
 # Obtiene el nombre del repositorio
 REPO_NAME="ejercicio_n1"
-WEB_URL="http://ec2-34-204-108-158.compute-1.amazonaws.com/index.php"
+WEB_URL="http://localhost/index.php"
 # Realiza una solicitud HTTP GET a la URL
 HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$WEB_URL")
 
