@@ -65,8 +65,8 @@ if [ -d "$REPO/.git" ]; then
 else
     echo -e "${red}${bold}Clonando el repositorio, por favor espera!${reset}"
     git clone -b clase2-linux-bash --single-branch https://github.com/roxsross/$REPO.git >/dev/null 2>&1
-	cp -r $REPO/app-295devops-travel/* /var/www/html
-	echo -e "${green}${bold}Repo clonado y direccionado al folder html${reset}"
+    cp -r $REPO/app-295devops-travel/* /var/www/html
+    echo -e "${green}${bold}Repo clonado y direccionado al folder html${reset}"
 fi
 
 
