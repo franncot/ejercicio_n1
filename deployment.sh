@@ -98,34 +98,30 @@ else
     cd ejercicio_n1 || exit 
 fi
 
-#Notificacion
+#Notificacion Discord
 DISCORD="https://discord.com/api/webhooks/1169002249939329156/7MOorDwzym-yBUs3gp0k5q7HyA42M5eYjfjpZgEwmAx1vVVcLgnlSh4TmtqZqCtbupov"
-
-# Obtiene el nombre del repositorio
 REPO_NAME="ejercicio_n1"
 WEB_URL="http://localhost/index.php"
+GRUPO="Equipo10"
+COMMIT="Commit: $(git rev-parse --short HEAD)"
+AUTHOR="Autor: $(git log -1 --pretty=format:'%an')"
+DESCRIPTION="Descripción: $(git log -1 --pretty=format:'%s')"
+MESSAGE="$AUTHOR\n$COMMIT\n$DESCRIPTION\n$GRUPO\n$DEPLOYMENT_INFO"
+
 # Realiza una solicitud HTTP GET a la URL
 HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$WEB_URL")
 
 # Verifica si la respuesta es 200 OK (puedes ajustar esto según tus necesidades)
 if [[ "$HTTP_STATUS" == "200" ]]; then
-    DEPLOYMENT_INFO="295DevOpsTravel - $WEB_URL está en línea."
-    GRUPO="Equipo10"
-    COMMIT="Commit: $(git rev-parse --short HEAD)"
-    AUTHOR="Autor: $(git log -1 --pretty=format:'%an')"
-    DESCRIPTION="Descripción: $(git log -1 --pretty=format:'%s')"
-    # Construye el mensaje
-    MESSAGE="$AUTHOR\n$COMMIT\n$DESCRIPTION\n$GRUPO\n$DEPLOYMENT_INFO"
+    DEPLOYMENT_INFO="295DevOpsTravel - está en línea."
     # Envía el mensaje a Discord utilizando la API de Discord
     curl -X POST -H "Content-Type: application/json" \
          -d '{
            "content": "'"${MESSAGE}"'"
          }' "$DISCORD" 
 else
-  DEPLOYMENT_INFO="La página web $WEB_URL no está en línea. Por favor revisa el servidor."
-  # Construye el mensaje
-    MESSAGE="$AUTHOR\n$COMMIT\n$DESCRIPTION\n$GRUPO\n$DEPLOYMENT_INFO"
-  # Envía el mensaje a Discord utilizando la API de Discord
+    DEPLOYMENT_INFO="DevOpsTravel no está en línea. Por favor revisa el servidor."
+    # Envía el mensaje a Discord utilizando la API de Discord
     curl -X POST -H "Content-Type: application/json" \
          -d '{
            "content": "'"${MESSAGE}"'"
