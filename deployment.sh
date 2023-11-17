@@ -14,6 +14,8 @@ if [ "$EUID" -ne 0 ]; then
     exit 1
 fi
 
+#Only one update
+sudo apt update >/dev/null 2>&1
 
 # Installation of components
 components=("apache2" "mariadb-server" "php" "git" "libapache2-mod-php" "php-mysql" "php-mbstring" "php-zip" "php-gd" "php-json" "php-curl" )
@@ -24,7 +26,6 @@ for component in "${components[@]}"; do
         echo -e "${green}${bold}$component ya esta instalado.${reset}"
     else
         echo -e "${red}${bold}Instalando $component .${reset}"
-        sudo apt update >/dev/null 2>&1
         sudo apt install "$component" -y >/dev/null 2>&1
 		
     fi
@@ -52,7 +53,7 @@ for service in "${services[@]}"; do
 done
 
 
-# Instalacion del repo
+# Cloning Repo DevOps Travel
 
 if [ -d "$REPO/.git" ]; then
      echo -e "${green}${bold}El repositorio ya existe, realizando git pull...${reset}"
@@ -77,7 +78,7 @@ if [ -z "$database_check" ]; then
     FLUSH PRIVILEGES;"
     mysql < /var/www/html/database/devopstravel.sql >/dev/null 2>&1
 else
-    echo -e "${green}${bold}La base de datos 'devopstravel' ya existe, no se necesita modificar nada mas.${reset}"
+    echo -e "${green}${bold}La base de datos 'devopstravel' ya existe y tiene data, no se necesita modificar nada mas.${reset}"
 fi
 
 #Modify PHP configurations
@@ -88,7 +89,7 @@ sed -i 's/""/"codepass"/g' /var/www/html/config.php
 sudo systemctl reload apache2 >/dev/null 2>&1
 
 
-#Repo ejercicio
+#Repo ejercicio para notificaciones
 if [ -d "ejercicio_n1/.git" ]; then
      echo -e "${green}${bold}El repositorio ya existe...${reset}"
     cd ejercicio_n1 || exit 
@@ -102,33 +103,32 @@ DISCORD="https://discord.com/api/webhooks/1169002249939329156/7MOorDwzym-yBUs3gp
 
 # Obtiene el nombre del repositorio
 REPO_NAME="ejercicio_n1"
-# Obtiene la URL remota del repositorio
-REPO_URL="https://github.com/franncot/ejercicio_n1.git"
-WEB_URL="http://ec2-54-152-223-94.compute-1.amazonaws.com/index.php"
+WEB_URL="http://ec2-34-204-108-158.compute-1.amazonaws.com/index.php"
 # Realiza una solicitud HTTP GET a la URL
 HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$WEB_URL")
 
 # Verifica si la respuesta es 200 OK (puedes ajustar esto según tus necesidades)
 if [[ "$HTTP_STATUS" == "200" ]]; then
-  # Obtén información del repositorio
-    #DEPLOYMENT_INFO2="Despliegue del repositorio $REPO_NAME: "
     DEPLOYMENT_INFO="295DevOpsTravel - $WEB_URL está en línea."
     GRUPO="Equipo10"
     COMMIT="Commit: $(git rev-parse --short HEAD)"
     AUTHOR="Autor: $(git log -1 --pretty=format:'%an')"
     DESCRIPTION="Descripción: $(git log -1 --pretty=format:'%s')"
+    # Construye el mensaje
+    MESSAGE="$AUTHOR\n$COMMIT\n$DESCRIPTION\n$GRUPO\n$DEPLOYMENT_INFO"
+    # Envía el mensaje a Discord utilizando la API de Discord
+    curl -X POST -H "Content-Type: application/json" \
+         -d '{
+           "content": "'"${MESSAGE}"'"
+         }' "$DISCORD" 
 else
-  DEPLOYMENT_INFO="La página web $WEB_URL no está en línea."
+  DEPLOYMENT_INFO="La página web $WEB_URL no está en línea. Por favor revisa el servidor."
+  # Construye el mensaje
+    MESSAGE="$AUTHOR\n$COMMIT\n$DESCRIPTION\n$GRUPO\n$DEPLOYMENT_INFO"
+  # Envía el mensaje a Discord utilizando la API de Discord
+    curl -X POST -H "Content-Type: application/json" \
+         -d '{
+           "content": "'"${MESSAGE}"'"
+         }' "$DISCORD 
 fi
 
-# Obtén información del repositorio
-
-
-# Construye el mensaje
-MESSAGE="$AUTHOR\n$COMMIT\n$DESCRIPTION\n$GRUPO\n$DEPLOYMENT_INFO"
-
-# Envía el mensaje a Discord utilizando la API de Discord
-curl -X POST -H "Content-Type: application/json" \
-     -d '{
-       "content": "'"${MESSAGE}"'"
-     }' "$DISCORD" 
