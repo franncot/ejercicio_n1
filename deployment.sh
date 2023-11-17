@@ -56,12 +56,12 @@ done
 # Cloning Repo DevOps Travel
 
 if [ -d "$REPO/.git" ]; then
-     echo -e "${green}${bold}El repositorio ya existe, realizando git pull...${reset}"
-     cd $REPO
-     git pull >/dev/null 2>&1
-     cd ..
-     cp -r $REPO/app-295devops-travel/* /var/www/html
-	 echo -e "${green}${bold}Pull completado, datos copiados a la carpeta html${reset}"
+    echo -e "${green}${bold}El repositorio ya existe, realizando git pull...${reset}"
+    cd $REPO
+    git pull >/dev/null 2>&1
+    cd ..
+    cp -r $REPO/app-295devops-travel/* /var/www/html
+    echo -e "${green}${bold}Pull completado, datos copiados a la carpeta html${reset}"
 else
     echo -e "${red}${bold}Clonando el repositorio, por favor espera!${reset}"
     git clone -b clase2-linux-bash --single-branch https://github.com/roxsross/$REPO.git >/dev/null 2>&1
