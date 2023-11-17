@@ -129,6 +129,6 @@ else
     curl -X POST -H "Content-Type: application/json" \
          -d '{
            "content": "'"${MESSAGE}"'"
-         }' "$DISCORD 
+         }' "$DISCORD"
 fi
 
