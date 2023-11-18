@@ -27,6 +27,7 @@ for component in "${components[@]}"; do
     else
         echo -e "${red}${bold}Instalando $component .${reset}"
         sudo apt install "$component" -y >/dev/null 2>&1
+        echo -e "${green}${bold}$component instalación completa ☑ .${reset}"
 		
     fi
 done
@@ -40,7 +41,7 @@ for service in "${services[@]}"; do
         echo -e "${red}${bold}$service no está en ejecución. Iniciando...${reset}"
         sudo systemctl start "$service" >/dev/null 2>&1
     else
-        echo -e "${green}${bold}$service ya está en ejecución.${reset}"
+        echo -e "${green}${bold}$service ya está en ejecución. Listo ☑ ${reset}"
     fi
 
     # Habilitar el servicio para iniciar en el arranque
@@ -48,7 +49,7 @@ for service in "${services[@]}"; do
         echo -e "${red}${bold}Habilitando $service para iniciar en el arranque.${reset}"
         sudo systemctl enable "$service" >/dev/null 2>&1
     else
-         echo -e "${green}${bold}$service ya está configurado para iniciar en el arranque.${reset}"
+         echo -e "${green}${bold}$service ya está configurado para iniciar en el arranque. Listo ☑ ${reset}"
     fi
 done
 
@@ -56,17 +57,17 @@ done
 # Cloning Repo DevOps Travel
 
 if [ -d "$REPO/.git" ]; then
-     echo -e "${green}${bold}El repositorio ya existe, realizando git pull...${reset}"
+     echo -e "${green}${bold}El repositorio DevOpsTravel ya existe, realizando git pull${reset}"
      cd $REPO
      git pull >/dev/null 2>&1
      cd ..
      cp -r $REPO/app-295devops-travel/* /var/www/html
 	 echo -e "${green}${bold}Pull completado, datos copiados a la carpeta html${reset}"
 else
-    echo -e "${red}${bold}Clonando el repositorio, por favor espera!${reset}"
+    echo -e "${red}${bold}Clonando el repositorio, por favor espera...${reset}"
     git clone -b clase2-linux-bash --single-branch https://github.com/roxsross/$REPO.git >/dev/null 2>&1
 	cp -r $REPO/app-295devops-travel/* /var/www/html
-	echo -e "${green}${bold}Repo clonado y direccionado al folder html${reset}"
+	echo -e "${green}${bold}Repo clonado y direccionado al folder html. Listo ☑ ${reset}"
 fi
 
 
@@ -83,7 +84,7 @@ if [ -z "$database_check" ]; then
     FLUSH PRIVILEGES;"
     mysql < /var/www/html/database/devopstravel.sql >/dev/null 2>&1
 else
-    echo -e "${green}${bold}La base de datos 'devopstravel' ya existe y tiene data, no se necesita modificar nada mas.${reset}"
+    echo -e "${green}${bold}La base de datos 'devopstravel' ya existe y tiene data, no se necesita modificar nada mas. Listo ☑${reset}"
 fi
 
 #Modify PHP configurations
@@ -96,7 +97,7 @@ sudo systemctl reload apache2 >/dev/null 2>&1
 
 #Repo ejercicio para notificaciones
 if [ -d "ejercicio_n1/.git" ]; then
-     echo -e "${green}${bold}El repositorio ya existe...${reset}"
+     echo -e "${green}${bold}El repositorio ya existe...Listo ☑${reset}"
     cd ejercicio_n1 || exit 
     git pull >/dev/null 2>&1
 else
