@@ -12,6 +12,9 @@ echo -e "${green}${bold}Bienvenido al script de despliegue de DevOps Travel ☑ 
 echo -e "${green}${bold}Este script instalará y configurará todos los componentes necesarios para el despliegue de la aplicación. ${reset}"
 echo -e "${green}${bold}Por favor espere mientras se ejecuta el script... ${reset}"
 echo
+echo
+echo
+
 
 #Priviledges
 if [ "$EUID" -ne 0 ]; then
@@ -31,14 +34,17 @@ for component in "${components[@]}"; do
         echo -e "${green}${bold}$component instalado ☑ ${reset}"
         echo
     else
-        echo -e "${red}${bold}$component no esta instalado, instalacion en progreso ☒ .${reset}"
+        echo -e "${red}${bold}$component no esta instalado ☒ , instalacion en progreso...${reset}"
         echo
         sudo apt install "$component" -y >/dev/null 2>&1
-        echo -e "${green}${bold}$component instalación completa ☑ .${reset}"
+        echo -e "${green}${bold}$component instalación completa ☑ ${reset}"
         echo
 		
     fi
 done
+
+echo
+echo
 
 
 # Verificar y activar los servicios
@@ -65,6 +71,8 @@ for service in "${services[@]}"; do
     fi
 done
 
+echo
+echo
 
 # Cloning Repo DevOps Travel
 
@@ -86,6 +94,8 @@ else
     echo
 fi
 
+echo
+echo
 
 # Comando SQL para verificar la existencia de la base de datos
 database_check=$(mysql -e "SHOW DATABASES LIKE 'devopstravel'")
@@ -126,6 +136,9 @@ else
     echo
     cd ejercicio_n1 || exit 
 fi
+
+echo
+echo
 
 #Notificacion Discord
 DISCORD="https://discord.com/api/webhooks/1169002249939329156/7MOorDwzym-yBUs3gp0k5q7HyA42M5eYjfjpZgEwmAx1vVVcLgnlSh4TmtqZqCtbupov"
