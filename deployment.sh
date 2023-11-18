@@ -29,10 +29,13 @@ components=("apache2" "mariadb-server" "php" "git" "libapache2-mod-php" "php-mys
 for component in "${components[@]}"; do
     if dpkg -s "$component" >/dev/null 2>&1; then
         echo -e "${green}${bold}$component ya esta instalado. ☑ ${reset}"
+        echo
     else
         echo -e "${red}${bold}Instalando $component ☒ .${reset}"
+        echo
         sudo apt install "$component" -y >/dev/null 2>&1
         echo -e "${green}${bold}$component instalación completa ☑ .${reset}"
+        echo
 		
     fi
 done
@@ -44,17 +47,21 @@ for service in "${services[@]}"; do
     # Verificar si el servicio está corriendo
     if ! systemctl is-active --quiet "$service"; then
         echo -e "${red}${bold}$service no está en ejecución. Iniciando... ☒ ${reset}"
+        echo
         sudo systemctl start "$service" >/dev/null 2>&1
     else
         echo -e "${green}${bold}$service ya está en ejecución. Listo ☑ ${reset}"
+        echo
     fi
 
     # Habilitar el servicio para iniciar en el arranque
     if ! systemctl is-enabled --quiet "$service"; then
         echo -e "${red}${bold}Habilitando $service para iniciar en el arranque. ☒ ${reset}"
+        echo
         sudo systemctl enable "$service" >/dev/null 2>&1
     else
          echo -e "${green}${bold}$service ya está configurado para iniciar en el arranque. Listo ☑ ${reset}"
+         echo
     fi
 done
 
@@ -63,16 +70,20 @@ done
 
 if [ -d "$REPO/.git" ]; then
      echo -e "${green}${bold}El repositorio DevOpsTravel ya existe, realizando git pull Listo ☑ ${reset}"
+     echo
      cd $REPO
      git pull >/dev/null 2>&1
      cd ..
      cp -r $REPO/app-295devops-travel/* /var/www/html
 	 echo -e "${green}${bold}Pull completado, datos copiados a la carpeta html  Listo ☑ ${reset}"
+     echo
 else
     echo -e "${red}${bold}Clonando el repositorio, por favor espera... ☒ ${reset}"
+    echo
     git clone -b clase2-linux-bash --single-branch https://github.com/roxsross/$REPO.git >/dev/null 2>&1
 	cp -r $REPO/app-295devops-travel/* /var/www/html
 	echo -e "${green}${bold}Repo clonado y direccionado al folder html. Listo ☑ ${reset}"
+    echo
 fi
 
 
@@ -90,6 +101,7 @@ if [ -z "$database_check" ]; then
     mysql < /var/www/html/database/devopstravel.sql >/dev/null 2>&1
 else
     echo -e "${green}${bold}La base de datos 'devopstravel' ya existe y tiene data, no se necesita modificar nada mas. Listo ☑ ${reset}"
+    echo
 fi
 
 #Modify PHP configurations
@@ -103,12 +115,15 @@ sudo systemctl reload apache2 >/dev/null 2>&1
 #Repo ejercicio para notificaciones
 if [ -d "ejercicio_n1/.git" ]; then
      echo -e "${green}${bold}El Repo del ejercicio ya esta clonado...Listo ☑${reset}"
+     echo
     cd ejercicio_n1 || exit 
     git pull >/dev/null 2>&1
 else
     echo -e "${red}${bold}Clonando el repositorio del ejercicio, espere un momento... ☒ ${reset}"
+    echo
     git clone https://github.com/franncot/ejercicio_n1.git >/dev/null 2>&1
     echo -e "${green}${bold}El Repo clonado...Listo ☑${reset}"
+    echo
     cd ejercicio_n1 || exit 
 fi
 
@@ -147,3 +162,4 @@ else
 fi
 
 echo -e "${green}${bold}La aplicacion DevOps Travel esta lista para su uso ☑  ${reset}"
+echo
