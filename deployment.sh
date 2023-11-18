@@ -75,11 +75,12 @@ echo
 # Cloning Repo DevOps Travel
 
 if [ -d "$REPO/.git" ]; then
-     echo -e "${green}${bold}El repositorio DevOpsTravel ya existe, realizando git pull Listo ☑ ${reset}"
+     echo -e "${green}${bold}El repositorio DevOpsTravel ya existe, realizando git pull...${reset}"
      cd $REPO
      git pull >/dev/null 2>&1
      cd ..
      cp -r $REPO/app-295devops-travel/* /var/www/html
+     echo
 	 echo -e "${green}${bold}Pull completado, datos copiados a la carpeta html  Listo ☑ ${reset}"
 else
     echo -e "${red}${bold}Clonando el repositorio, por favor espera... ☒ ${reset}"
