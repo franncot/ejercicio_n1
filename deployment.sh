@@ -121,6 +121,8 @@ sed -i 's/""/"codepass"/g' /var/www/html/config.php
 #Reload to get changes
 sudo systemctl reload apache2 >/dev/null 2>&1
 
+echo
+echo
 
 #Repo ejercicio para notificaciones
 if [ -d "ejercicio_n1/.git" ]; then
