@@ -72,7 +72,6 @@ for service in "${services[@]}"; do
 done
 
 echo
-echo
 
 # Cloning Repo DevOps Travel
 
@@ -90,7 +89,6 @@ else
 	echo -e "${green}${bold}Repo clonado y direccionado al folder html. Listo ☑ ${reset}"
 fi
 
-echo
 echo
 
 # Comando SQL para verificar la existencia de la base de datos
@@ -117,21 +115,16 @@ sed -i 's/""/"codepass"/g' /var/www/html/config.php
 #Reload to get changes
 sudo systemctl reload apache2 >/dev/null 2>&1
 
-echo
-echo
 
 #Repo ejercicio para notificaciones
 if [ -d "ejercicio_n1/.git" ]; then
      echo -e "${green}${bold}El Repo del ejercicio ya esta clonado...Listo ☑${reset}"
-     echo
     cd ejercicio_n1 || exit 
     git pull >/dev/null 2>&1
 else
     echo -e "${red}${bold}Clonando el repositorio del ejercicio, espere un momento... ☒ ${reset}"
-    echo
     git clone https://github.com/franncot/ejercicio_n1.git >/dev/null 2>&1
     echo -e "${green}${bold}El Repo clonado...Listo ☑${reset}"
-    echo
     cd ejercicio_n1 || exit 
 fi
 
