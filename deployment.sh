@@ -28,10 +28,10 @@ components=("apache2" "mariadb-server" "php" "git" "libapache2-mod-php" "php-mys
 # Loop through the components array and check/install each one
 for component in "${components[@]}"; do
     if dpkg -s "$component" >/dev/null 2>&1; then
-        echo -e "${green}${bold}$component ya esta instalado. ☑ ${reset}"
+        echo -e "${green}${bold}$component instalado ☑ ${reset}"
         echo
     else
-        echo -e "${red}${bold}Instalando $component ☒ .${reset}"
+        echo -e "${red}${bold}$component no esta instalado, instalacion en progreso ☒ .${reset}"
         echo
         sudo apt install "$component" -y >/dev/null 2>&1
         echo -e "${green}${bold}$component instalación completa ☑ .${reset}"
@@ -161,5 +161,5 @@ else
          }' "$DISCORD"
 fi
 
-echo -e "${green}${bold}La aplicacion DevOps Travel esta lista para su uso ☑  ${reset}"
+echo -e "${green}${bold}☑ ☑ ☑ La aplicacion DevOps Travel esta lista para su uso ☑ ☑ ☑  ${reset}"
 echo
