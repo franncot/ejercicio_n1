@@ -97,7 +97,7 @@ sudo systemctl reload apache2 >/dev/null 2>&1
 
 #Repo ejercicio para notificaciones
 if [ -d "ejercicio_n1/.git" ]; then
-     echo -e "${green}${bold}El repositorio ya existe...Listo ☑${reset}"
+     echo -e "${green}${bold}El Repo del ejercicio ya esta clonado...Listo ☑${reset}"
     cd ejercicio_n1 || exit 
     git pull >/dev/null 2>&1
 else
