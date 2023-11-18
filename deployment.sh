@@ -86,6 +86,10 @@ else
     git clone -b clase2-linux-bash --single-branch https://github.com/roxsross/$REPO.git >/dev/null 2>&1
 	cp -r $REPO/app-295devops-travel/* /var/www/html
 	echo -e "${green}${bold}Repo clonado y direccionado al folder html. Listo ☑ ${reset}"
+    sleep 5
+    sed -i "s/DirectoryIndex index.html index.cgi index.pl index.php index.xhtml index.htm/DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm/g" /etc/apache2/mods-enabled/dir.conf
+    sed -i 's/""/"codepass"/g' /var/www/html/config.php
+	echo -e "${green}${bold}Se ha configurado dir.conf y config.php Listo ☑ ${reset}"
 fi
 
 echo
@@ -103,13 +107,9 @@ if [ -z "$database_check" ]; then
     FLUSH PRIVILEGES;"
     mysql < /var/www/html/database/devopstravel.sql >/dev/null 2>&1
 else
-    echo -e "${green}${bold}La base de datos 'devopstravel' ya existe y tiene data, no se necesita modificar nada mas. Listo ☑ ${reset}"
+    echo -e "${green}${bold}La base de datos 'devopstravel' ya existe y contiene datos, no se necesita modificar nada mas. Listo ☑ ${reset}"
     echo
 fi
-
-#Modify PHP configurations
-sed -i "s/DirectoryIndex index.html index.cgi index.pl index.php index.xhtml index.htm/DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm/g" /etc/apache2/mods-enabled/dir.conf
-sed -i 's/""/"codepass"/g' /var/www/html/config.php
 
 #Reload to get changes
 sudo systemctl reload apache2 >/dev/null 2>&1
