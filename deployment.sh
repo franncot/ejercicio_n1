@@ -78,20 +78,16 @@ echo
 
 if [ -d "$REPO/.git" ]; then
      echo -e "${green}${bold}El repositorio DevOpsTravel ya existe, realizando git pull Listo ☑ ${reset}"
-     echo
      cd $REPO
      git pull >/dev/null 2>&1
      cd ..
      cp -r $REPO/app-295devops-travel/* /var/www/html
 	 echo -e "${green}${bold}Pull completado, datos copiados a la carpeta html  Listo ☑ ${reset}"
-     echo
 else
     echo -e "${red}${bold}Clonando el repositorio, por favor espera... ☒ ${reset}"
-    echo
     git clone -b clase2-linux-bash --single-branch https://github.com/roxsross/$REPO.git >/dev/null 2>&1
 	cp -r $REPO/app-295devops-travel/* /var/www/html
 	echo -e "${green}${bold}Repo clonado y direccionado al folder html. Listo ☑ ${reset}"
-    echo
 fi
 
 echo
