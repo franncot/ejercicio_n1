@@ -84,7 +84,7 @@ if [ -z "$database_check" ]; then
     FLUSH PRIVILEGES;"
     mysql < /var/www/html/database/devopstravel.sql >/dev/null 2>&1
 else
-    echo -e "${green}${bold}La base de datos 'devopstravel' ya existe y tiene data, no se necesita modificar nada mas. Listo ☑${reset}"
+    echo -e "${green}${bold}La base de datos 'devopstravel' ya existe y tiene data, no se necesita modificar nada mas. Listo ☑ ${reset}"
 fi
 
 #Modify PHP configurations
@@ -139,3 +139,4 @@ else
          }' "$DISCORD"
 fi
 
+echo -e "${green}${bold}La aplicacion DevOps Travel esta lista para su uso ☑  ${reset}"
