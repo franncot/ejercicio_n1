@@ -81,16 +81,16 @@ if [ -d "$REPO/.git" ]; then
      cd ..
      cp -r $REPO/app-295devops-travel/* /var/www/html
      echo
-	 echo -e "${green}${bold}Pull completado, datos copiados a la carpeta html  Listo ☑ ${reset}"
+     echo -e "${green}${bold}Pull completado, datos copiados a la carpeta html  Listo ☑ ${reset}"
 else
-    echo -e "${red}${bold}Clonando el repositorio, por favor espera... ☒ ${reset}"
-    git clone -b clase2-linux-bash --single-branch https://github.com/roxsross/$REPO.git >/dev/null 2>&1
-    cp -r $REPO/app-295devops-travel/* /var/www/html
-    echo -e "${green}${bold}Repo clonado y direccionado al folder html. Listo ☑ ${reset}"
-    sleep 5
-    sed -i "s/DirectoryIndex index.html index.cgi index.pl index.php index.xhtml index.htm/DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm/g" /etc/apache2/mods-enabled/dir.conf
-    sed -i 's/""/"codepass"/g' /var/www/html/config.php
-    echo -e "${green}${bold}Se ha configurado dir.conf y config.php Listo ☑ ${reset}"
+     echo -e "${red}${bold}Clonando el repositorio, por favor espera... ☒ ${reset}"
+     git clone -b clase2-linux-bash --single-branch https://github.com/roxsross/$REPO.git >/dev/null 2>&1
+     cp -r $REPO/app-295devops-travel/* /var/www/html
+     echo -e "${green}${bold}Repo clonado y direccionado al folder html. Listo ☑ ${reset}"
+     sleep 5
+     sed -i "s/DirectoryIndex index.html index.cgi index.pl index.php index.xhtml index.htm/DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm/g" /etc/apache2/mods-enabled/dir.conf
+     sed -i 's/""/"codepass"/g' /var/www/html/config.php
+     echo -e "${green}${bold}Se ha configurado dir.conf y config.php Listo ☑ ${reset}"
 fi
 
 echo
