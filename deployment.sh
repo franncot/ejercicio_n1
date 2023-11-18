@@ -7,6 +7,12 @@ bold="\e[1m"
 reset="\e[0m"
 REPO="bootcamp-devops-2023"
 
+#Priviledges
+if [ "$EUID" -ne 0 ]; then
+    echo -e "${red}${bold}Este script requiere priviledgios de administrador para ser ejecutado. Por favor usa Sudo o Root. ☒ ${reset}"
+    exit 1
+fi
+
 echo
 echo -e "${green}${bold}Bienvenido al script de despliegue de DevOps Travel ☑ ${reset}"
 echo -e "${green}${bold}Este script instalará y configurará todos los componentes necesarios para el despliegue de la aplicación. ${reset}"
@@ -14,13 +20,6 @@ echo -e "${green}${bold}Por favor espere mientras se ejecuta el script... ${rese
 echo
 echo
 echo
-
-
-#Priviledges
-if [ "$EUID" -ne 0 ]; then
-    echo -e "${red}${bold}Este script requiere priviledgios de administrador para ser ejecutado. Por favor usa Sudo o Root. ☒ ${reset}"
-    exit 1
-fi
 
 #Only one update
 sudo apt update >/dev/null 2>&1
