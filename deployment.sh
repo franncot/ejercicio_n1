@@ -176,5 +176,5 @@ else
          }' "$DISCORD"
 fi
 
-echo -e "${green}${bold}☑ ☑ ☑ La aplicacion DevOps Travel esta lista para su uso ☑ ☑ ☑  ${reset}"
+echo -e "${green}${bold}☑ ☑ ☑  La aplicacion DevOps Travel esta lista para su uso ☑ ☑ ☑  ${reset}"
 echo
