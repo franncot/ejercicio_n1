@@ -34,7 +34,7 @@ for component in "${components[@]}"; do
         echo -e "${green}${bold}$component instalado ☑ ${reset}"
         echo
     else
-        echo -e "${red}${bold}$component no esta instalado ☒ , instalacion en progreso...${reset}"
+        echo -e "${red}${bold}$component no esta instalado ☒ instalación en progreso...${reset}"
         echo
         sudo apt install "$component" -y >/dev/null 2>&1
         echo -e "${green}${bold}$component instalación completa ☑ ${reset}"
