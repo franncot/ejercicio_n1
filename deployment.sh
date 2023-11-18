@@ -7,6 +7,11 @@ bold="\e[1m"
 reset="\e[0m"
 REPO="bootcamp-devops-2023"
 
+echo
+echo -e "${green}${bold}Bienvenido al script de despliegue de DevOps Travel ☑ ${reset}"
+echo -e "${green}${bold}Este script instalará y configurará todos los componentes necesarios para el despliegue de la aplicación. ${reset}"
+echo -e "${green}${bold}Por favor espere mientras se ejecuta el script... ${reset}"
+echo
 
 #Priviledges
 if [ "$EUID" -ne 0 ]; then
